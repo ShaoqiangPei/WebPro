@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <!--手机高宽度撑满屏幕-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JS交互</title>
+</head>
+<body>
+
+<p><input type="button" id="enter" value="调用Java方法" onclick="testClick()" /></p>
+<p><input type="button" id="enter1" value="调用alert" onclick="testClick1()" /></p>
+<!--    <input type="button" value="测试啥" onclick="invokedByJava('hello')" />-->
+
+<p id="show"></p>
+</body>
+
+<script type="text/javascript">
+        //初始化jsBridge库
+        function connectWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                document.addEventListener(
+                    'WebViewJavascriptBridgeReady'
+                    , function() {
+                        callback(WebViewJavascriptBridge)
+                    },
+                    false
+                );
+            }
+        }
+
+       /*初始化执行    webView.send("hello1111111111"); 无回调函数
+                      webView.send("zq", new CallBackFunction()  有回调函数
+       */
+        connectWebViewJavascriptBridge(function(bridge) {
+            bridge.init(function(message, responseCallback) {
+                //初始化时Android调用js,js接受Android传过来的值
+                document.getElementById("show").innerHTML = "data = " + message;
+
+                var data="初始化Android调用js时，js返回给Android的数据";
+                responseCallback(data);
+            });
+
+            //android调用js
+            bridge.registerHandler("functionJs", function(data, responseCallback) {
+                //展示Android传过来的参数
+                document.getElementById("show").innerHTML = ("Android端: = " + data);
+
+                //回传数据给Android
+                var responseData = "Javascript 数据";
+                responseCallback(responseData);
+            });
+        })
+
+        /**js调用Android(调用默认方法)**/
+        function testClick() {
+            //send message to native
+            var data = "我是webview给Android的数据";
+
+            window.WebViewJavascriptBridge.send(
+                data
+                , function(responseData) {
+                   //alert(responseData);
+                   document.getElementById("show").innerHTML = "data = " + responseData;
+                }
+            );
+        }
+
+        /**js调用Android(调用自定义tag的方法)**/
+        function testClick1() {
+
+            //参数一：调用java中的方法   submitFromWeb是方法名，必须和Android中注册时候的方法名称保持一致
+            //参数二：返回给Android端的数据，可以为字符串，json等信息
+            //参数三：js接收到Android传递过来的数据之后的相应处理逻辑
+            window.WebViewJavascriptBridge.callHandler(
+                    'submitFromWeb'
+                    ,'我是自定义的js方法，可调用Android'  //该类型是任意类型
+                , function(responseData) {
+                document.getElementById("show").innerHTML = "得到Java传过来的数据 data = " + responseData
+            }
+            );
+        }
+  </script>
+</html>
