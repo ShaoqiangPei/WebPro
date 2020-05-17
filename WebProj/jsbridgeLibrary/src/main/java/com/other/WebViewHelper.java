@@ -101,4 +101,11 @@ public class WebViewHelper {
         return false;
     }
 
+    /**设置webView背景色**/
+    public void setBackgroundColor(WebView webView,int color){
+        webView.setBackgroundColor(color);
+    }
+
+
+
 }
