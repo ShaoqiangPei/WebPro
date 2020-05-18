@@ -30,7 +30,7 @@ util.WebLogUtil ————  打印工具类
 JsWebChromeClient ————  自定义WebChromeClient,主要用于处理拍照、相册等兼容问题  
 [WebViewHelper](https://github.com/ShaoqiangPei/WebPro/blob/master/read/WebViewHelper%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.md) ————  webview帮助类 
 ### 三. 接入流程
-具体参考接入流程说明
+具体参考[接入流程说明](https://github.com/ShaoqiangPei/WebPro/blob/master/read/%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B%E8%AF%B4%E6%98%8E.md)
 
 
 
