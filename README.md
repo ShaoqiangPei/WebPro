@@ -28,7 +28,7 @@
 util.StringUtil ————  字符串处理工具类  
 util.WebLogUtil ————  打印工具类  
 JsWebChromeClient ————  自定义WebChromeClient,主要用于处理拍照、相册等兼容问题  
-WebViewHelper ————  webview帮助类 
+[WebViewHelper](https://github.com/ShaoqiangPei/WebPro/blob/master/read/WebViewHelper%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.md) ————  webview帮助类 
 
 
 
