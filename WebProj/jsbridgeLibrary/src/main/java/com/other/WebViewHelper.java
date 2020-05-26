@@ -106,6 +106,4 @@ public class WebViewHelper {
         webView.setBackgroundColor(color);
     }
 
-
-
 }
