@@ -1,17 +1,12 @@
 package com.webproj;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 import com.github.lzyzsd.jsbridge.BridgeHandler;
 import com.github.lzyzsd.jsbridge.BridgeWebView;
@@ -50,15 +45,11 @@ public class MainActivity extends AppCompatActivity{
         mWebViewHelper=new WebViewHelper();
         mJsWebChromeClient=new JsWebChromeClient();
         //设置打开文件,相册等的处理
-        mJsWebChromeClient.setOpenFileChooserCallBack(new JsWebChromeClient.OpenFileChooserCallBack() {
-            @Override
-            public void openFileChooserCallBack(ValueCallback<Uri> uploadMsg, String acceptType) {
-
-            }
+        mJsWebChromeClient.setOnCameraPermissionListener(new JsWebChromeClient.OnCameraPermissionListener() {
 
             @Override
-            public void showFileChooserCallBack(ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
-
+            public void permission() {
+                //申请权限及调用相机，相册处理等
             }
         });
         //webview基础设置
