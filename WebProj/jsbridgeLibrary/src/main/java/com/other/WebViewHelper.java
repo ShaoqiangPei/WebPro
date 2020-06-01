@@ -6,7 +6,6 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-
 import com.other.util.StringUtil;
 
 /**
@@ -31,7 +30,10 @@ public class WebViewHelper {
         String cacheDirPath = context.getFilesDir().getAbsolutePath() + "cache/";
         webviewSettings.setAppCachePath(cacheDirPath);
         webviewSettings.setAppCacheEnabled(true);//设置Application缓存API开启
+        //设置支持html5标签
         webviewSettings.setDomStorageEnabled(true);//设置开启DOM存储API权限,WebView能够使用DOM storage API
+        webviewSettings.setSaveFormData(false);//设置webview是否保存表单数据,默认为true
+
         webviewSettings.setAllowFileAccess(true);//设置在WebView内部允许访问文件
         webviewSettings.setAppCacheMaxSize(1024 * 1024 * 8);
         webviewSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//设置缓存加载模式

@@ -1,27 +1,16 @@
 package com.webproj;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
-import android.widget.TextView;
-import com.github.lzyzsd.jsbridge.BridgeHandler;
-import com.github.lzyzsd.jsbridge.BridgeWebView;
-import com.github.lzyzsd.jsbridge.CallBackFunction;
-import com.other.JsWebChromeClient;
-import com.other.WebViewHelper;
+import android.widget.Button;
 import com.other.util.WebLogUtil;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView mTv;
-    private BridgeWebView mWebView;
-
-    private WebViewHelper mWebViewHelper;
-    private JsWebChromeClient mJsWebChromeClient;
+    private Button mBtnJsBridge;
+    private Button mBtnJs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -37,100 +26,34 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void initView() {
-        mWebView=findViewById(R.id.webview);
-        mTv=findViewById(R.id.tv);
+        mBtnJsBridge=findViewById(R.id.btn_jsbridge);
+        mBtnJs=findViewById(R.id.btn_js);
     }
 
     private void initData() {
-        mWebViewHelper=new WebViewHelper();
-        mJsWebChromeClient=new JsWebChromeClient();
-        //设置打开文件,相册等的处理
-        mJsWebChromeClient.setOnCameraPermissionListener(new JsWebChromeClient.OnCameraPermissionListener() {
-
-            @Override
-            public void permission() {
-                //申请权限及调用相机，相册处理等
-            }
-        });
-        //webview基础设置
-        mWebViewHelper.setWebViewConfig(mWebView,MainActivity.this);
-        //设置WebChromeClient,用以支持webview显示对话框,网站图标,网站title,加载进度等等
-        mWebView.setWebChromeClient(mJsWebChromeClient);
-
-        //注:不能设置"mWebView.setWebViewClient(new WebViewClient())",否则辉导致Android与js交互不通
-//        //设置WebViewClient向一个网页发送请求，可以返回文本，文件等
-//        mWebView.setWebViewClient(new WebViewClient());
-
-        //加载本地html文件
-        mWebViewHelper.loadAssetsFile(mWebView,"test.html");
-        //加载网址
-        //mWebViewHelper.loadUrl(mWebView,"https://www.baidu.com");
+        //打开log
+        WebLogUtil.setDebug(true);
     }
 
     private void setListener() {
-        //注册默认方法供js调用
-        mWebView.setDefaultHandler(new BridgeHandler() {
-            @Override
-            public void handler(String data, CallBackFunction function) {
-                WebLogUtil.i("====收到web数据====" + data);
-
-                //发送数据给js
-                function.onCallBack("====Android给js数据回传===");
-            }
-        });
-
-        //注册带tag的方法供js调用
-        mWebView.registerHandler("submitFromWeb", new BridgeHandler() {
-            @Override
-            public void handler(String data, CallBackFunction function) {
-                WebLogUtil.i("得到JS传过来的数据 data ="+data);
-                //发送消息给js
-                function.onCallBack("传递数据给JS");
-            }
-        });
-
-        mTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                getDefaultWithOutVaule();
-//                getDefaultWithVaule();
-                getTagFunction();
-            }
-        });
+        mBtnJsBridge.setOnClickListener(this);
+        mBtnJs.setOnClickListener(this);
     }
 
     @Override
-    protected void onDestroy() {
-        //清理webview相关配置
-        mWebViewHelper.destoryWebViewConfig(mWebView,MainActivity.this);
-        super.onDestroy();
-    }
-
-    /**Android调用js默认方法,不接受js返回值**/
-    private void getDefaultWithOutVaule(){
-        mWebView.send("=====到底啥玩意=====");
-    }
-
-    /**Android调用js默认方法,接受js返回值**/
-    private void getDefaultWithVaule(){
-        mWebView.send("=====到底啥玩意=====", new CallBackFunction() {
-            @Override
-            public void onCallBack(String data) {
-                WebLogUtil.i("======返回结果啊====="+data);
-
-                mTv.setText(data);
-            }
-        });
-    }
-
-    /**Android调用js带tag方法,接受js返回值**/
-    private void getTagFunction(){
-        mWebView.callHandler("functionJs", "我是王者荣耀", new CallBackFunction() {
-            @Override
-            public void onCallBack(String data) {
-                WebLogUtil.i("=======调用js返回数据====data=" + data);
-            }
-        });
+    public void onClick(View v) {
+       switch (v.getId()) {
+           case R.id.btn_jsbridge://jsBridge与Android交互
+               Intent jsBridgeIntent=new Intent(MainActivity.this,JsBridgeActivity.class);
+               startActivity(jsBridgeIntent);
+               break;
+           case R.id.btn_js://js与Android交互
+               Intent jsIntent=new Intent(MainActivity.this,JsActivity.class);
+               startActivity(jsIntent);
+               break;
+           default:
+               break;
+       }
     }
 
 }
