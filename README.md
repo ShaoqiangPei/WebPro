@@ -44,8 +44,9 @@ util.WebLogUtil ————  打印工具类
 2  若项目不是很大，安全性要求不高，并且想快速接入，可选择`js`接入方式
 3. 看与`android`对接的`web`端使用情况，若`web`端使用的是`jsBridge`,则`android`使用`jsBridge`接入，若`web`端使用的是`js`方式,则`android`也使用`js`接入,这样可以加快对接进程。
 #### 3.2 具体两种方式的接入流程
-- `jsBridge`接入流程可参考[`jsBridge`接入流程说明](https://github.com/ShaoqiangPei/WebPro/blob/master/read/%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B%E8%AF%B4%E6%98%8E.md)  
 - `js`接入流程可参考[`js`接入流程说明](https://github.com/ShaoqiangPei/WebPro/blob/master/read/js%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B%E8%AF%B4%E6%98%8E.md)
+- `jsBridge`接入流程可参考[`jsBridge`接入流程说明](https://github.com/ShaoqiangPei/WebPro/blob/master/read/%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B%E8%AF%B4%E6%98%8E.md)  
+
 
 
 
