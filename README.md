@@ -30,6 +30,7 @@ util.WebLogUtil ————  打印工具类
 [JsWebChromeClient](https://github.com/ShaoqiangPei/WebPro/blob/master/read/JsWebChromeClient%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.md) ————  自定义WebChromeClient,主要用于处理拍照、相册等兼容问题  
 [WebViewHelper](https://github.com/ShaoqiangPei/WebPro/blob/master/read/WebViewHelper%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.md) ————  webview帮助类   
 [WebViewClientInterceptor](https://github.com/ShaoqiangPei/WebPro/blob/master/read/WebViewClientInterceptor%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.md) ————  用于拦截webView中url的WebViewClient(继承自WebViewClient)  
+[JsAndroidHelper](https://github.com/ShaoqiangPei/WebPro/blob/master/read/js%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B%E8%AF%B4%E6%98%8E.md) ————  封装原生`android`与`js`交互方法的工具类  
 ### 三. 接入流程
 #### 3.1 Android 与 js 交互方式介绍
 目前主要有两种方式实现`android`与`js`交互。  
@@ -44,7 +45,7 @@ util.WebLogUtil ————  打印工具类
 3. 看与`android`对接的`web`端使用情况，若`web`端使用的是`jsBridge`,则`android`使用`jsBridge`接入，若`web`端使用的是`js`方式,则`android`也使用`js`接入,这样可以加快对接进程。
 #### 3.2 具体两种方式的接入流程
 - `jsBridge`接入流程可参考[`jsBridge`接入流程说明](https://github.com/ShaoqiangPei/WebPro/blob/master/read/%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B%E8%AF%B4%E6%98%8E.md)  
-- `js`接入流程可参考[`js`接入流程说明]()
+- `js`接入流程可参考[`js`接入流程说明](https://github.com/ShaoqiangPei/WebPro/blob/master/read/js%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B%E8%AF%B4%E6%98%8E.md)
 
 
 
